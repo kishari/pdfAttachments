@@ -57,15 +57,15 @@ public class Pilot {
         PdfDictionary root = reader.getCatalog();
         PdfDictionary documentNames = root.getAsDict(PdfName.NAMES);
         PdfDictionary embeddedFiles = documentNames.getAsDict(PdfName.EMBEDDEDFILES);
-        PdfArray filespecs = embeddedFiles.getAsArray(PdfName.NAMES);
+        PdfArray fileSpecs = embeddedFiles.getAsArray(PdfName.NAMES);
 
         PdfDictionary fileSpec;
         PdfDictionary refs;
         FileOutputStream fos;
         PRStream stream;
-        for (int i = 0; i < filespecs.size(); ) {
-          filespecs.getAsString(i++);
-          fileSpec = filespecs.getAsDict(i++);
+        for (int i = 0; i < fileSpecs.size(); ) {
+          fileSpecs.getAsString(i++);
+          fileSpec = fileSpecs.getAsDict(i++);
           refs = fileSpec.getAsDict(PdfName.EF);
           for (PdfName key : refs.getKeys()) {
               stream = (PRStream) PdfReader.getPdfObject(refs.getAsIndirectObject(key));
